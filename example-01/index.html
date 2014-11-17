@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lite Engine Example</title>
+  <style>
+    #canvas {
+      margin: 0 auto;
+      border: 1px solid;
+    }
+  </style>
+</head>
+<body>
+  <div id='game'>
+    <canvas id='canvas'></canvas>
+  </div>
+  <p>Hit SPACEBAR to add an entity</p>
+
+  <script src="/lib/sakee.js"></script>
+  <script src="/lib/stats.js"></script>
+  <script src="/lib/fixed-game-loop.js"></script>
+
+  <script src="js/component/position.js"></script>
+  <script src="js/component/velocity.js"></script>
+  <script src="js/component/diameter.js"></script>
+
+  <script src="js/system/moviment.js"></script>
+  <script src="js/system/renderer.js"></script>
+
+  <script src="js/index.js"></script>
+</body>
+</html>

@@ -1,43 +1,31 @@
 var stats = new Stats();
 document.body.appendChild(stats.domElement);
 
-document.addEventListener('keydown', function(e) {
-  if (e.keyCode === 32) addEntity(random(1,16));
-});
+createBall();
 
-function random(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+function createBall() {
+  var newEntityID = sakee.entity.create(['position', 'velocity', 'radius', 'color']);
+
+  // get entity components
+  var position = sakee.entity.getComponent(newEntityID, 'position');
+  var velocity = sakee.entity.getComponent(newEntityID, 'velocity');
+  var radius = sakee.entity.getComponent(newEntityID, 'radius');
+
+  // set position (middle of canvas)
+  position.x = canvas.width / 2;
+  position.y = canvas.height / 2;
+
+  // set velocity (100 pixels/second)
+  velocity.x = Math.random() * 150;
+  velocity.y = Math.random() * 150;
+
+  // set radius
+  radius.value = 32;
 }
 
-var total = 0;
-function addEntity(radius) {
-  var newEntityID = sakee.entity.create(['Position', 'Velocity', 'Diameter']),
-    px = random(radius, canvas.width - radius),
-    py = random(radius, canvas.height - radius),
-    vx = random(-3, 3),
-    vy = random(-3, 3);
-
-  var position = sakee.entity.getComponent(newEntityID, 'Position');
-  var velocity = sakee.entity.getComponent(newEntityID, 'Velocity');
-  var diameter = sakee.entity.getComponent(newEntityID, 'Diameter');
-
-  // set position
-  position.x = px;
-  position.y = py;
-
-  // set velocity
-  velocity.x = vx;
-  velocity.y = vy;
-
-  // set diameter
-  diameter.value = radius * 2;
-
-  console.log(++total);
-}
-
+// start game loop
 window.timer = new Timer({
   update: function() {
-
     sakee.system.emit('update');
   },
 
